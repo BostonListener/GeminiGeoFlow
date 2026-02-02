@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archaeological Site Extractor</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gemini GeoFlow</h1>
+        <p class="subtitle">Extract archaeological site information from PDF or enter coordinates manually</p>
+        
+        <!-- Input Mode Selector -->
+        <div class="input-mode-selector">
+            <label class="mode-option">
+                <input type="radio" name="inputMode" value="pdf" checked>
+                <span>📄 PDF Upload</span>
+            </label>
+            <label class="mode-option">
+                <input type="radio" name="inputMode" value="manual">
+                <span>📍 Manual Coordinates</span>
+            </label>
+        </div>
+
+        <!-- PDF Upload Section -->
+        <div class="upload-section" id="uploadSection">
+            <form id="uploadForm">
+                <div class="file-input-wrapper">
+                    <input type="file" id="pdfFile" name="pdf_file" accept=".pdf" required>
+                    <label for="pdfFile" id="fileLabel">Choose PDF file...</label>
+                </div>
+                <button type="submit" id="submitBtn">Extract Sites</button>
+            </form>
+        </div>
+
+        <!-- Manual Coordinate Input Section -->
+        <div id="manualSection" class="manual-section" style="display: none;">
+            <!-- Site Name -->
+            <div class="form-group">
+                <label for="siteName">Site Name: *</label>
+                <input type="text" id="siteName" placeholder="Enter site name" required>
+                <div class="helper-text">Required - Name of the archaeological site</div>
+            </div>
+
+            <!-- Format Selector -->
+            <div class="format-selector">
+                <label>
+                    <input type="radio" name="coordFormat" value="decimal" checked>
+                    <span>Decimal Degrees</span>
+                </label>
+                <label>
+                    <input type="radio" name="coordFormat" value="dms">
+                    <span>DMS (Degrees Minutes Seconds)</span>
+                </label>
+            </div>
+
+            <!-- Decimal Inputs -->
+            <div id="decimalInputs" class="coord-inputs">
+                <div class="form-group">
+                    <label for="latDecimal">Latitude: *</label>
+                    <input type="number" id="latDecimal" 
+                           min="-90" max="90" step="0.000001" 
+                           placeholder="e.g., 40.748817">
+                    <div class="helper-text">Range: -90 to 90 (South is negative, North is positive)</div>
+                </div>
+                <div class="form-group">
+                    <label for="lonDecimal">Longitude: *</label>
+                    <input type="number" id="lonDecimal" 
+                           min="-180" max="180" step="0.000001"
+                           placeholder="e.g., -73.985428">
+                    <div class="helper-text">Range: -180 to 180 (West is negative, East is positive)</div>
+                </div>
+            </div>
+
+            <!-- DMS Inputs -->
+            <div id="dmsInputs" class="coord-inputs" style="display: none;">
+                <!-- Latitude DMS -->
+                <div class="form-group">
+                    <div class="coord-section-title">Latitude: *</div>
+                    <div class="dms-input-group">
+                        <input type="number" id="latDeg" min="0" max="90" step="1" placeholder="0">
+                        <span>°</span>
+                        <input type="number" id="latMin" min="0" max="59" step="1" placeholder="0">
+                        <span>'</span>
+                        <input type="number" id="latSec" min="0" max="59.999" step="0.001" placeholder="0">
+                        <span>"</span>
+                        <select id="latDir">
+                            <option value="N">N</option>
+                            <option value="S">S</option>
+                        </select>
+                    </div>
+                    <div class="helper-text">Degrees: 0-90, Minutes: 0-59, Seconds: 0-59.999</div>
+                </div>
+                
+                <!-- Longitude DMS -->
+                <div class="form-group">
+                    <div class="coord-section-title">Longitude: *</div>
+                    <div class="dms-input-group">
+                        <input type="number" id="lonDeg" min="0" max="180" step="1" placeholder="0">
+                        <span>°</span>
+                        <input type="number" id="lonMin" min="0" max="59" step="1" placeholder="0">
+                        <span>'</span>
+                        <input type="number" id="lonSec" min="0" max="59.999" step="0.001" placeholder="0">
+                        <span>"</span>
+                        <select id="lonDir">
+                            <option value="E">E</option>
+                            <option value="W">W</option>
+                        </select>
+                    </div>
+                    <div class="helper-text">Degrees: 0-180, Minutes: 0-59, Seconds: 0-59.999</div>
+                </div>
+            </div>
+
+            <button type="button" id="manualSubmitBtn">Extract Sites</button>
+        </div>
+
+        <div id="statusSection" class="status-section" style="display: none;">
+            <div class="loader"></div>
+            <p id="statusText">Processing PDF...</p>
+        </div>
+
+        <div id="errorSection" class="error-section" style="display: none;">
+            <h3>Error</h3>
+            <p id="errorText"></p>
+        </div>
+
+        <div id="resultsSection" class="results-section" style="display: none;">
+            <div class="results-header">
+                <h2>Extraction Results</h2>
+                <button id="downloadBtn" class="download-btn">Download JSON</button>
+            </div>
+
+            <div class="summary">
+                <h3>Summary</h3>
+                <div id="summaryContent"></div>
+            </div>
+
+            <div class="sites-list">
+                <h3>Sites Found</h3>
+                <div id="sitesContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/ui.js"></script>
+    <script src="/static/js/eventHandlers.js"></script>
+    <script src="/static/js/mapHelpers.js"></script>
+</body>
+</html>

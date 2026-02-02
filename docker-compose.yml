@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: archaeological-site-extractor
+    restart: unless-stopped
+    ports:
+      - "8088:8088"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
