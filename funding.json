@@ -1,0 +1,89 @@
+{
+    "$schema": "https://fundingjson.org/schema/v1.1.0.json",
+    "version": "v1.1.0",
+
+    "entity": {
+        "type": "individual",
+        "role": "owner",
+        "name": "Linduo Li",
+        "email": "linduo.li@ip-paris.fr",
+        "phone": "",
+        "description": "AI researcher and developer at Institut Polytechnique de Paris specializing in deep learning and geospatial data processing applied to archaeology and cultural heritage. The project team includes interdisciplinary expertise in industrial AI, machine learning, and formal archaeological training to ensure both technical soundness and archaeological relevance.",
+        "webpageUrl": {
+            "url": "https://github.com/BostonListener",
+            "wellKnown": ""
+        }
+    },
+
+    "projects": [{
+        "guid": "gemini-geoflow",
+        "name": "Gemini GeoFlow: AI-Powered Archaeological Site Discovery",
+        "description": "An open-source infrastructure combining Google Gemini 3 and Earth Engine to automate archaeological site extraction and analysis from research papers and satellite imagery. The system addresses extreme label scarcity in archaeological data, enabling scalable site discovery across regions with limited field access. All software, models, and documentation are released under open licenses to lower technical barriers for archaeological research worldwide.",
+        "webpageUrl": {
+            "url": "https://github.com/BostonListener/GeminiGeoFlow",
+            "wellKnown": ""
+        },
+        "repositoryUrl": {
+            "url": "https://github.com/BostonListener/GeminiGeoFlow",
+            "wellKnown": ""
+        },
+        "licenses": ["spdx:MIT"],
+        "tags": [
+            "archaeology",
+            "artificial-intelligence",
+            "deeping-learning",
+            "remote-sensing",
+            "geospatial",
+            "cultural-heritage",
+            "satellite-imagery",
+            "anomaly-detection",
+            "open-science"
+        ]
+    }],
+
+    "funding": {
+        "channels": [
+            {
+                "guid": "bank-transfer",
+                "type": "bank",
+                "address": "Contact via email for bank transfer details",
+                "description": "International bank transfer in EUR. Please contact linduo.li@ip-paris.fr for account information."
+            }
+        ],
+
+        "plans": [
+            {
+                "guid": "compute-resources",
+                "status": "active",
+                "name": "GPU Compute Resources for Model Training",
+                "description": "Funding for Google Colab A100 GPU instances required for deep learning model training. Estimated 20,000 compute units for training runs, iterations, ablation studies, and validation.",
+                "amount": 2220,
+                "currency": "EUR",
+                "frequency": "one-time",
+                "channels": ["bank-transfer"]
+            },
+            {
+                "guid": "technical-support",
+                "status": "active",
+                "name": "Technical Internship for Model Development",
+                "description": "6-month technical internship in France for dataset augmentation, metric design, model training and evaluation. 140 hours/month at €4.50/hour.",
+                "amount": 3780,
+                "currency": "EUR",
+                "frequency": "one-time",
+                "channels": ["bank-transfer"]
+            },
+            {
+                "guid": "general-support",
+                "status": "active",
+                "name": "General Project Support",
+                "description": "Flexible funding to support ongoing development, maintenance, and community engagement for the open-source archaeological AI infrastructure.",
+                "amount": 1000,
+                "currency": "EUR",
+                "frequency": "one-time",
+                "channels": ["bank-transfer"]
+            }
+        ],
+
+        "history": []
+    }
+}
